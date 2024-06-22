@@ -30,16 +30,25 @@
 
 
 def topKFrequent(nums: list[int], k: int) -> list[int]:
-    hashMap = {}
-
+    # step 1 : manually count frequency of each elements
+    freq = {}
     for n in nums:
-        if n not in hashMap:
-            hashMap[n] = 1
+        if n in freq:
+            freq[n] += 1
         else:
-            hashMap[n] += 1
+            freq[n] = 1
+    # step 2 : convert frequency dictionary into a list of tuples
+    # and sort it
+    freq_list = list(freq.items())
+    print(freq_list)
+    # applying sort
+    # sort by frequency, descending
+    freq_list.sort(key=lambda x: x[1], reverse=True)
 
-    print(hashMap)
-    return []
+    # step 3 : Extract the elements of top k frequent elements
+    top_k_elements = [item[0] for item in freq_list[:k]]
+
+    return top_k_elements
 
 
 def test(testNum, nums, k, expected):
